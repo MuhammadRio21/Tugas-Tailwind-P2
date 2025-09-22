@@ -1,52 +1,109 @@
 # Tugas-Tailwind-P2
 Muhammad Rio(2411102441270)
 
-1. Konfigurasi Kolom untuk Tiap Breakpoint
-Mobile (≤576px): 1 kolom (col-12)
-Alasan:
+Penjelasan Desain
+1. Mobile-First Approach
+Desain dimulai dari tampilan mobile (320px) kemudian dikembangkan untuk tablet dan desktop menggunakan breakpoint Tailwind:
 
-Thumb reach zone: Pada mobile, area yang mudah dijangkau jempol adalah tengah layar
-Cognitive load: 1 gambar per baris mengurangi beban kognitif, user fokus pada satu konten
-Touch target: Gambar berukuran penuh lebih mudah di-tap (minimum 44px touch target)
-Loading performance: Satu gambar per viewport mengurangi beban rendering
+Default (mobile): Layout vertikal, grid 1 kolom
+md (768px+): Layout horizontal, grid 3 kolom
+lg (1024px+): Layout expanded, grid 4 kolom
 
-Tablet (576px-991px): 2-3 kolom (col-sm-6, col-md-4)
-Alasan:
+2. Fitur Tailwind yang Digunakan
+   
+a. Responsive Utilities
 
-Screen real estate: Tablet memiliki ruang cukup untuk 2-3 kolom tanpa mengorbankan detail
-Viewing distance: Tablet biasanya dipegang 40-60cm, optimal untuk scanning multiple items
-Aspect ratio: Landscape tablet cocok untuk grid 3 kolom
+grid-cols-1 md:grid-cols-3 lg:grid-cols-4 - Grid responsif
+flex-col md:flex-row - Layout direction yang berubah
+text-center md:text-left - Text alignment responsif
+justify-center md:justify-start - Justify content responsif
 
-Desktop (≥992px): 4 kolom (col-lg-3)
-Alasan:
+b) Order & Layout Control
 
-Desktop patterns: User desktop terbiasa dengan grid layout (seperti file explorer)
-Mouse precision: Mouse memungkinkan interaksi dengan target kecil
-Information density: Desktop dapat menampilkan lebih banyak informasi sekaligus
+order-1 md:order-1 - Profile picture order
+order-2 md:order-3 - Button positioning
+order-3 md:order-2 - Content reordering
 
-2. Strategi Tombol Follow/Edit Profile di Mobile
-Pendekatan yang Digunakan:
+c) Grid Spanning & Nesting
 
-Strategi Mobile-First:
+md:col-span-2 lg:col-span-2 - Featured post spanning
+md:col-span-1 lg:col-span-2 - Dynamic column spanning
+Nested grid dalam card untuk layout yang lebih kompleks
 
-Posisi Sentral: Tombol diletakkan di tengah layar, mudah dijangkau jempol
-Vertical Stack: Menggunakan flex-column di mobile untuk stacking vertikal
-Adequate Spacing: gap-2 memberikan jarak cukup antar tombol (minimum 8px)
-Button Size: btn-sm dengan px-4 memberikan padding horizontal yang cukup
-Visual Hierarchy: Primary button (Follow) dibedakan dengan warna
+3. Component Breakdown
+Header Profil
 
-Potensi Masalah:
+Sticky navigation dengan sticky top-0 z-50
+Responsive icon visibility dengan hidden md:block
 
-Performance Issues:
+Profile Section
 
-50 gambar = heavy page load
-Memory consumption tinggi
-Scroll performance menurun
+Flexbox dengan responsive direction
+Profile picture dengan gradient border custom
+Stats dengan spacing yang konsisten
+Action buttons yang berubah layout di berbagai breakpoint
 
-Solusi
-2. Performance Optimizations
+Story Highlights
 
-Lazy Loading: Images dimuat hanya saat terlihat
-Intersection Observer: Infinite scroll otomatis
-Virtual Scrolling: Hanya render items yang visible
-Image Compression: Ukuran berbeda untuk kategori berbeda
+Horizontal scroll dengan overflow-x-auto
+Consistent sizing dengan flex-shrink-0
+
+Photo Feed
+
+Advanced grid layout dengan spanning
+Hover effects dengan group dan group-hover:
+Image overlay dengan opacity transitions
+Nested grids untuk variasi visual
+
+Tantangan Layout yang Diselesaikan
+1. Complex Grid Layout
+
+Menggunakan col-span untuk featured posts
+Nested grids untuk variasi visual
+Responsive spanning yang berbeda per breakpoint
+
+2. Flexible Component Ordering
+
+Profile elements yang reorder pada tablet/desktop
+Button positioning yang optimal untuk setiap device
+Content hierarchy yang logical
+
+3. Interactive States
+
+Hover effects pada feed posts
+Button state management
+Smooth transitions dan transformations
+
+📱 Responsive Behavior
+Mobile (< 768px)
+
+Single column grid
+Vertical profile layout
+Full-width buttons
+Bottom navigation
+Optimized touch targets
+
+Tablet (768px - 1024px)
+
+3-column feed grid
+Horizontal profile layout
+Balanced button sizes
+Hidden mobile navigation
+
+Desktop (1024px+)
+
+4-column feed grid
+Expanded profile section
+Larger interactive elements
+Enhanced hover states
+
+Pertanyaan Reflektif
+1. Mengapa memilih Mobile-First Approach?
+Mobile-first memastikan core functionality bekerja pada device dengan constraint terbesar (layar kecil, bandwidth terbatas). Ini mendorong prioritisasi content dan progressive enhancement untuk device yang lebih capable.
+2. Bagaimana Tailwind CSS mempengaruhi workflow development?
+Positif:
+
+Rapid prototyping dengan utility classes
+Consistent design system built-in
+Reduced CSS file size dengan unused class purging
+Inline styling yang readable dan maintainable
