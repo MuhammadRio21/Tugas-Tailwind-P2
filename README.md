@@ -1,2 +1,2 @@
 # Tugas-Tailwind-P2
-Muhammad Rio(2411102441273)
+Muhammad Rio(2411102441270)
